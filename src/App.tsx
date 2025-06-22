@@ -3,9 +3,10 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { mockOrders } from './mocks/order';
 import { FaEllipsis } from 'react-icons/fa6';
-import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io';
+import { IoIosArrowDown, IoIosArrowForward, IoIosHourglass } from 'react-icons/io';
 import { LuExternalLink } from 'react-icons/lu';
 import Warning from './components/Warning';
+import OrderDetail from './components/OrderDetail';
 
 function App() {
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -79,16 +80,16 @@ function App() {
 
       <div className="overflow-x-auto">
         <table className="min-w-full">
-          <thead className="bg-gray-100 border-b-2">
+          <thead className="border-b-2 border-[#d4f2fa]">
             <tr>
               <th className="p-2">Account</th>
               <th className="p-2">Operation</th>
               <th className="p-2">Symbol</th>
-              <th className="p-2">Status</th>
               <th className="p-2 hidden sm:table-cell">Description</th>
               <th className="p-2 hidden sm:table-cell">Qty.</th>
               <th className="p-2 hidden sm:table-cell">Filled Qty.</th>
               <th className="p-2 hidden sm:table-cell">Price</th>
+              <th className="p-2">Status</th>
               <th className="p-2 hidden sm:table-cell">Date</th>
               <th className="p-2 hidden sm:table-cell">Expiration</th>
               <th className="p-2 hidden sm:table-cell">No. Ref.</th>
@@ -102,7 +103,7 @@ function App() {
                 <tr key={order.id} className={`${openRow === index ? "" : "border-"} text-right`}>
                   <td className="flex justify-center items-center gap-2 font-bold text-[#2e73fe] p-2">
                     <button className='cursor-pointer text-black' onClick={() => toggleRow(index)}>
-                      {openRow === index ? <IoIosArrowDown /> : <IoIosArrowForward />}
+                      {openRow === index ? <IoIosArrowDown fontWeight='bold' fontSize={22} /> : <IoIosArrowForward fontWeight='bold' fontSize={22} />}
                     </button>
                     <span>
                       {order.account}
@@ -110,11 +111,17 @@ function App() {
                   </td>
                   <td className="p-2">{order.operation}</td>
                   <td className="p-2">{order.symbol}</td>
-                  <td className="p-2">{order.status}</td>
                   <td className="p-2 hidden sm:table-cell">{order.description}</td>
                   <td className="p-2 hidden sm:table-cell">{order.quantity}</td>
                   <td className="p-2 hidden sm:table-cell">{order.filledQuantity}</td>
                   <td className="p-2 hidden sm:table-cell">{order.price}</td>
+                  <td className="p-2 flex justify-center items-center gap-2">
+                    {order.status === 'Waiting' ?
+                      <div className='border rounded-full p-1 text-[#0094dd]'>
+                        <IoIosHourglass size={16} />
+                      </div> : null}
+                    <span>{order.status}</span>
+                  </td>
                   <td className="p-2 hidden sm:table-cell">{order.date}</td>
                   <td className="p-2 hidden sm:table-cell">{order.expiration}</td>
                   <td className="p-2 hidden sm:table-cell">{order.noRef}</td>
@@ -128,10 +135,10 @@ function App() {
                 {openRow === index && (
                   <tr>
                     <td colSpan={13}>
-                      <div className="py-2 px-1 text-sm bg-[#faf8fe] rounded-lg m-2">
+                      <div className="p-2 text-sm bg-[#faf8fe] rounded-lg m-2">
                         <div className='flex justify-between items-centers mb-2'>
                           <div className='flex items-center gap-2 text-blue-500 text-bold'>
-                            <p className='bg-white font-bold text-[#2e73fe] p-2'>FIRST-NAME LAST-NAME (10103ZA - US Margin)</p>
+                            <p className='bg-white font-bold text-[#2e73fe] p-2'>{order.detail.firstName} {order.detail.lastName} ({order.detail.accountCode} - {order.detail.accountType})</p>
                             <button className='flex justify-center items-center gap-2 cursor-pointer rounded-full font-medium border border-gray-600 px-5 py-1 text-[#1685d0]'>
                               <span>
                                 Full review details
@@ -143,14 +150,12 @@ function App() {
                             <button className='bg-[#0065c4] font-bold text-white rounded-full px-10 cursor-pointer'>ACCEPT</button>
                             <button className='cursor-pointer font-bold flex justify-center items-center gap-2 bg-white border-2 border-red-500 text-red-500 rounded-full px-10'>
                               <span>REJECT</span>
-                              <IoIosArrowDown />
+                              <IoIosArrowDown fontWeight='bold' fontSize={22} />
                             </button>
                           </div>
                         </div>
                         <hr className='text-gray-300' />
-                        <div className='my-2'>
-                          numbers area
-                        </div>
+                        <OrderDetail detail={order.detail} />
                         <Warning />
                       </div>
                     </td>
