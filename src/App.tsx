@@ -5,6 +5,7 @@ import { mockOrders } from './mocks/order';
 import { FaEllipsis } from 'react-icons/fa6';
 import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io';
 import { LuExternalLink } from 'react-icons/lu';
+import Warning from './components/Warning';
 
 function App() {
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -150,17 +151,7 @@ function App() {
                         <div className='my-2'>
                           numbers area
                         </div>
-                        <div className='p-3 bg-[#f4f5f4]'>
-                          <p>Warning(s)</p>
-                          <ul>
-                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quidem, commodi voluptatibus quod repellat quasi provident assumenda molestias quo! Dicta voluptate impedit et adipisci aut eius maxime saepe reprehenderit fugit?</li>
-                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quidem, commodi voluptatibus quod repellat quasi provident assumenda molestias quo! Dicta voluptate impedit et adipisci aut eius maxime saepe reprehenderit fugit?</li>
-                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quidem, commodi voluptatibus quod repellat quasi provident assumenda molestias quo! Dicta voluptate impedit et adipisci aut eius maxime saepe reprehenderit fugit?</li>
-                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quidem, commodi voluptatibus quod repellat quasi provident assumenda molestias quo! Dicta voluptate impedit et adipisci aut eius maxime saepe reprehenderit fugit?</li>
-                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quidem, commodi voluptatibus quod repellat quasi provident assumenda molestias quo! Dicta voluptate impedit et adipisci aut eius maxime saepe reprehenderit fugit?</li>
-                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quidem, commodi voluptatibus quod repellat quasi provident assumenda molestias quo! Dicta voluptate impedit et adipisci aut eius maxime saepe reprehenderit fugit?</li>
-                          </ul>
-                        </div>
+                        <Warning />
                       </div>
                     </td>
                   </tr>
