@@ -2,6 +2,9 @@ import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { mockOrders } from './mocks/order';
+import { FaEllipsis } from 'react-icons/fa6';
+import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io';
+import { LuExternalLink } from 'react-icons/lu';
 
 function App() {
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -21,7 +24,7 @@ function App() {
   });
 
   return (
-    <div className="p-4 w-full">
+    <main className="p-4 w-full">
       <header className="mb-6 flex justify-between">
         <div className="flex justify-between items-center mb-4">
           <div>
@@ -68,7 +71,7 @@ function App() {
             />
           </div>
           <div className='flex justify-center items-center'>
-            <button className="px-6 py-2 border rounded-full w-full">Search</button>
+            <button className="px-7 py-2 rounded-full w-full bg-[#0065c4] text-white">Search</button>
           </div>
         </div>
       </header>
@@ -95,10 +98,14 @@ function App() {
           <tbody>
             {filteredOrders.map((order, index) => (
               <>
-                <tr key={order.id} className='border-b text-right'>
-                  <td className="p-2">
-                    <button className='border' onClick={() => toggleRow(index)}>action</button>
-                    {order.account}
+                <tr key={order.id} className={`${openRow === index ? "" : "border-"} text-right`}>
+                  <td className="flex justify-center items-center gap-2 font-bold text-[#2e73fe] p-2">
+                    <button className='cursor-pointer text-black' onClick={() => toggleRow(index)}>
+                      {openRow === index ? <IoIosArrowDown /> : <IoIosArrowForward />}
+                    </button>
+                    <span>
+                      {order.account}
+                    </span>
                   </td>
                   <td className="p-2">{order.operation}</td>
                   <td className="p-2">{order.symbol}</td>
@@ -112,36 +119,48 @@ function App() {
                   <td className="p-2 hidden sm:table-cell">{order.noRef}</td>
                   <td className="p-2 hidden sm:table-cell">{order.extRef}</td>
                   <td className="p-2 hidden sm:table-cell">
-                    <button className='border'>action</button>
+                    <button className='cursor-pointer p-1 bg-[#edf4fa] rounded-full'>
+                      <FaEllipsis className='text-[#0169c5]' />
+                    </button>
                   </td>
                 </tr>
                 {openRow === index && (
                   <tr>
-                    <td colSpan={13} className="px-4 py-3 text-sm bg-blue-100">
-                      <div className='flex justify-between items-centers mb-2'>
-                        <div className='flex items-center gap-2 text-blue-500 text-bold'>
-                          <p>FIRST-NAME LAST-NAME (10103ZA - US Margin)</p>
-                          <button className='rounded-full border-2 border-gray-500 px-5 py-1 text-blue-500'>Full review details</button>
+                    <td colSpan={13}>
+                      <div className="py-2 px-1 text-sm bg-[#faf8fe] rounded-lg m-2">
+                        <div className='flex justify-between items-centers mb-2'>
+                          <div className='flex items-center gap-2 text-blue-500 text-bold'>
+                            <p className='bg-white font-bold text-[#2e73fe] p-2'>FIRST-NAME LAST-NAME (10103ZA - US Margin)</p>
+                            <button className='flex justify-center items-center gap-2 cursor-pointer rounded-full font-medium border border-gray-600 px-5 py-1 text-[#1685d0]'>
+                              <span>
+                                Full review details
+                              </span>
+                              <LuExternalLink />
+                            </button>
+                          </div>
+                          <div className='flex gap-2'>
+                            <button className='bg-[#0065c4] font-bold text-white rounded-full px-10 cursor-pointer'>ACCEPT</button>
+                            <button className='cursor-pointer font-bold flex justify-center items-center gap-2 bg-white border-2 border-red-500 text-red-500 rounded-full px-10'>
+                              <span>REJECT</span>
+                              <IoIosArrowDown />
+                            </button>
+                          </div>
                         </div>
-                        <div className='flex gap-2'>
-                          <button className='bg-blue-500 text-white rounded-full px-5 py-1'>ACCEPT</button>
-                          <button className='bg-white border-2 border-red-500 text-red-500 rounded-full px-5 py-1'>REJECT</button>
+                        <hr className='text-gray-300' />
+                        <div className='my-2'>
+                          numbers area
                         </div>
-                      </div>
-                      <hr />
-                      <div className='my-2'>
-                        numbers area
-                      </div>
-                      <div className='p-3 bg-yellow-50'>
-                        <p>Warning(s)</p>
-                        <ul>
-                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quidem, commodi voluptatibus quod repellat quasi provident assumenda molestias quo! Dicta voluptate impedit et adipisci aut eius maxime saepe reprehenderit fugit?</li>
-                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quidem, commodi voluptatibus quod repellat quasi provident assumenda molestias quo! Dicta voluptate impedit et adipisci aut eius maxime saepe reprehenderit fugit?</li>
-                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quidem, commodi voluptatibus quod repellat quasi provident assumenda molestias quo! Dicta voluptate impedit et adipisci aut eius maxime saepe reprehenderit fugit?</li>
-                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quidem, commodi voluptatibus quod repellat quasi provident assumenda molestias quo! Dicta voluptate impedit et adipisci aut eius maxime saepe reprehenderit fugit?</li>
-                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quidem, commodi voluptatibus quod repellat quasi provident assumenda molestias quo! Dicta voluptate impedit et adipisci aut eius maxime saepe reprehenderit fugit?</li>
-                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quidem, commodi voluptatibus quod repellat quasi provident assumenda molestias quo! Dicta voluptate impedit et adipisci aut eius maxime saepe reprehenderit fugit?</li>
-                        </ul>
+                        <div className='p-3 bg-[#f4f5f4]'>
+                          <p>Warning(s)</p>
+                          <ul>
+                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quidem, commodi voluptatibus quod repellat quasi provident assumenda molestias quo! Dicta voluptate impedit et adipisci aut eius maxime saepe reprehenderit fugit?</li>
+                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quidem, commodi voluptatibus quod repellat quasi provident assumenda molestias quo! Dicta voluptate impedit et adipisci aut eius maxime saepe reprehenderit fugit?</li>
+                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quidem, commodi voluptatibus quod repellat quasi provident assumenda molestias quo! Dicta voluptate impedit et adipisci aut eius maxime saepe reprehenderit fugit?</li>
+                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quidem, commodi voluptatibus quod repellat quasi provident assumenda molestias quo! Dicta voluptate impedit et adipisci aut eius maxime saepe reprehenderit fugit?</li>
+                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quidem, commodi voluptatibus quod repellat quasi provident assumenda molestias quo! Dicta voluptate impedit et adipisci aut eius maxime saepe reprehenderit fugit?</li>
+                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab quidem, commodi voluptatibus quod repellat quasi provident assumenda molestias quo! Dicta voluptate impedit et adipisci aut eius maxime saepe reprehenderit fugit?</li>
+                          </ul>
+                        </div>
                       </div>
                     </td>
                   </tr>
@@ -154,7 +173,7 @@ function App() {
           <p className="text-gray-500 mt-4">No orders found.</p>
         )}
       </div>
-    </div>
+    </main>
   );
 }
 
