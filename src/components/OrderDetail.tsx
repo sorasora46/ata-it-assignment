@@ -1,5 +1,6 @@
 import type { FC, ReactNode } from "react";
 import type { IOrderDetail } from "../types/order";
+import { formatDateTime } from "../utils/DateUtil";
 
 interface OrderDetailProps {
   detail: IOrderDetail;
@@ -24,7 +25,7 @@ const OrderDetail: FC<OrderDetailProps> = ({ detail }) => (
     <DetailCell label="Exchange Rate">{detail.exchangeRate}</DetailCell>
     <DetailCell label="O/S Limit">{detail.osLimit}</DetailCell>
     <DetailCell label="Reference Number">{detail.referenceNumber}</DetailCell>
-    <DetailCell label="Date / Time">{detail.dateTime}</DetailCell>
+    <DetailCell label="Date / Time">{formatDateTime(detail.dateTime)}</DetailCell>
     <DetailCell label="Telephone">{detail.telephone}</DetailCell>
     <DetailCell label="User ID">{detail.userId}</DetailCell>
   </div>

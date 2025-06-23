@@ -7,6 +7,7 @@ import { IoIosArrowDown, IoIosArrowForward, IoIosHourglass } from 'react-icons/i
 import { LuExternalLink } from 'react-icons/lu';
 import Warning from './components/Warning';
 import OrderDetail from './components/OrderDetail';
+import { formatDateTime } from './utils/DateUtil';
 
 function App() {
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -122,8 +123,8 @@ function App() {
                       </div> : null}
                     <span>{order.status}</span>
                   </td>
-                  <td className="p-2 hidden sm:table-cell">{order.date}</td>
-                  <td className="p-2 hidden sm:table-cell">{order.expiration}</td>
+                  <td className="p-2 hidden sm:table-cell">{formatDateTime(order.date)}</td>
+                  <td className="p-2 hidden sm:table-cell">{formatDateTime(order.expiration)}</td>
                   <td className="p-2 hidden sm:table-cell">{order.noRef}</td>
                   <td className="p-2 hidden sm:table-cell">{order.extRef}</td>
                   <td className="p-2 hidden sm:table-cell">
