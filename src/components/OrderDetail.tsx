@@ -1,6 +1,7 @@
 import type { FC, ReactNode } from "react";
 import type { IOrderDetail } from "../types/order";
 import { formatDateTime } from "../utils/DateUtil";
+import { formatNumber } from "../utils/NumberUtil";
 
 interface OrderDetailProps {
   detail: IOrderDetail;
@@ -20,10 +21,10 @@ const DetailCell: FC<DetailCellProps> = ({ label, children }) => (
 
 const OrderDetail: FC<OrderDetailProps> = ({ detail }) => (
   <div className="my-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-4 text-sm">
-    <DetailCell label="Net Amount">{detail.netAmount}</DetailCell>
-    <DetailCell label="Price">{detail.price}</DetailCell>
-    <DetailCell label="Exchange Rate">{detail.exchangeRate}</DetailCell>
-    <DetailCell label="O/S Limit">{detail.osLimit}</DetailCell>
+    <DetailCell label="Net Amount">{formatNumber(detail.netAmount, 2)} USD</DetailCell>
+    <DetailCell label="Price">{formatNumber(detail.price, 2)}</DetailCell>
+    <DetailCell label="Exchange Rate">{formatNumber(detail.exchangeRate, 4)}</DetailCell>
+    <DetailCell label="O/S Limit">{formatNumber(detail.osLimit, 1)}</DetailCell>
     <DetailCell label="Reference Number">{detail.referenceNumber}</DetailCell>
     <DetailCell label="Date / Time">{formatDateTime(detail.dateTime)}</DetailCell>
     <DetailCell label="Telephone">{detail.telephone}</DetailCell>

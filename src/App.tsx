@@ -12,6 +12,7 @@ import CustomDatePicker from './components/CustomDatePicker';
 import type { Order } from './types/order';
 import { BiSolidUpArrow, BiSolidDownArrow } from 'react-icons/bi';
 import { columnDefs } from './constants/columns';
+import { formatNumber } from './utils/NumberUtil';
 
 function App() {
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -197,7 +198,7 @@ function App() {
                   <td className="p-2 hidden sm:table-cell">{order.description}</td>
                   <td className="p-2 hidden sm:table-cell">{order.quantity}</td>
                   <td className="p-2 hidden sm:table-cell">{order.filledQuantity}</td>
-                  <td className="p-2 hidden sm:table-cell">{order.price}</td>
+                  <td className="p-2 hidden sm:table-cell">{formatNumber(order.price, 2)}</td>
                   <td className="p-2 flex justify-center items-center gap-2">
                     {order.status === 'Waiting' ?
                       <div className='border rounded-full p-1 text-[#0094dd]'>

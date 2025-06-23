@@ -12,5 +12,5 @@ export const formatDateTime = (dateInput: string) => {
   const minutes = pad(date.getMinutes());
   const seconds = pad(date.getSeconds());
 
-  return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+  return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
 };
